@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeautySalon - Find and Book the Best Salons</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header id="header" class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">BeautySalon</a>
+        <nav class="desktop-nav">
+          <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="#search">Find Salons</a></li>
+            <li><a href="appointments.html">Appointments</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <a href="login.html" class="btn-secondary"><i class="fas fa-user"></i> Sign In</a>
+        </div>
+        <button id="mobile-menu-btn" class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+      <div class="container">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#search">Find Salons</a></li>
+          <li><a href="appointments.html">Appointments</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="login.html"><i class="fas fa-user"></i> Sign In</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Find the Perfect Salon for Your Beauty Needs</h1>
+        <p>Book appointments at top-rated salons in your city with just a few clicks.</p>
+        <div id="search" class="search-container">
+          <form id="search-form">
+            <div class="search-box">
+              <input type="text" id="city-search" placeholder="Enter your city..." autocomplete="off">
+              <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i> Search
+              </button>
+            </div>
+          </form>
+          <div id="city-suggestions" class="city-suggestions"></div>
+          <div class="popular-cities">
+            <p>Popular cities:</p>
+            <div class="city-chips">
+              <button class="city-chip" data-city="New York">New York</button>
+              <button class="city-chip" data-city="Los Angeles">Los Angeles</button>
+              <button class="city-chip" data-city="Chicago">Chicago</button>
+              <button class="city-chip" data-city="Miami">Miami</button>
+              <button class="city-chip" data-city="San Francisco">San Francisco</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Salons Section -->
+  <section class="featured-salons">
+    <div class="container">
+      <h2 class="section-title">Featured Salons</h2>
+      <div id="featured-salons-grid" class="salons-grid">
+        <!-- Salon cards will be populated here by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Results Section -->
+  <section id="search-results-section" class="search-results hidden">
+    <div class="container">
+      <h2 class="section-title">Salons in <span id="search-city"></span></h2>
+      
+      <div class="filters-container">
+        <div class="filter">
+          <label for="service-filter">Service</label>
+          <select id="service-filter">
+            <option value="">All Services</option>
+            <option value="Hair">Hair</option>
+            <option value="Nails">Nails</option>
+            <option value="Skin">Skin</option>
+            <option value="Makeup">Makeup</option>
+            <option value="Spa">Spa</option>
+            <option value="Grooming">Grooming</option>
+          </select>
+        </div>
+        
+        <div class="filter">
+          <label for="price-filter">Price</label>
+          <select id="price-filter">
+            <option value="">All Prices</option>
+            <option value="$">$ (Budget)</option>
+            <option value="$$">$$ (Moderate)</option>
+            <option value="$$$">$$$ (Luxury)</option>
+            <option value="$$$$">$$$$ (Premium)</option>
+          </select>
+        </div>
+        
+        <div class="filter">
+          <label for="rating-filter">Rating</label>
+          <select id="rating-filter">
+            <option value="">All Ratings</option>
+            <option value="4.5">4.5+ Stars</option>
+            <option value="4">4+ Stars</option>
+            <option value="3.5">3.5+ Stars</option>
+          </select>
+        </div>
+        
+        <button id="reset-filters" class="btn-reset-filters">
+          <i class="fas fa-undo"></i> Reset Filters
+        </button>
+      </div>
+      
+      <div id="search-results-grid" class="salons-grid">
+        <!-- Search results will be populated here by JavaScript -->
+      </div>
+      
+      <div id="no-results" class="no-results hidden">
+        <i class="fas fa-search"></i>
+        <h3>No salons found</h3>
+        <p>Try adjusting your search criteria or check out other cities</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>Search</h3>
+          <p>Find salons in your city with our simple search</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">
+            <i class="fas fa-store"></i>
+          </div>
+          <h3>Compare</h3>
+          <p>Browse salon profiles, services, and reviews</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <h3>Book</h3>
+          <p>Select a service and book your appointment</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">
+            <i class="fas fa-smile"></i>
+          </div>
+          <h3>Enjoy</h3>
+          <p>Visit the salon and enjoy your service</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Our Users Say</h2>
+      <div class="testimonials-slider">
+        <div class="testimonial">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"I found my favorite hair stylist through BeautySalon! The booking process was so simple, and I love being able to see all the services and prices upfront."</p>
+          <div class="testimonial-author">
+            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Sarah J.">
+            <div>
+              <p class="author-name">Sarah J.</p>
+              <p class="author-location">New York</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"As someone who travels frequently, being able to quickly find quality salons in different cities has been a game-changer. The reviews and photos are always accurate!"</p>
+          <div class="testimonial-author">
+            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Michael T.">
+            <div>
+              <p class="author-name">Michael T.</p>
+              <p class="author-location">Chicago</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <p class="testimonial-text">"The convenience of booking appointments online and getting reminders has saved me so much time. Plus, I've discovered some amazing new salons in my neighborhood!"</p>
+          <div class="testimonial-author">
+            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Jennifer L.">
+            <div>
+              <p class="author-name">Jennifer L.</p>
+              <p class="author-location">Los Angeles</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Find Your Perfect Salon?</h2>
+        <p>Join thousands of satisfied customers who have discovered their ideal beauty experience</p>
+        <a href="#search" class="btn-primary">Search Salons Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h3 class="footer-title">BeautySalon</h3>
+          <p class="footer-description">Your one-stop destination for finding and booking the best beauty salons in your city.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#search">Find Salons</a></li>
+            <li><a href="appointments.html">My Appointments</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-title">Popular Cities</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="city-link" data-city="New York">New York</a></li>
+            <li><a href="#" class="city-link" data-city="Los Angeles">Los Angeles</a></li>
+            <li><a href="#" class="city-link" data-city="Chicago">Chicago</a></li>
+            <li><a href="#" class="city-link" data-city="Miami">Miami</a></li>
+            <li><a href="#" class="city-link" data-city="San Francisco">San Francisco</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> 123 Beauty Street, Suite 100<br>New York, NY 10001</li>
+            <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+            <li><i class="fas fa-envelope"></i> info@beautysalon.com</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 BeautySalon. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Salon Modal -->
+  <div id="salon-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="modal-body">
+        <!-- Salon details will be populated here by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Appointments - BeautySalon</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="header" class="header scrolled">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">BeautySalon</a>
+        <nav class="desktop-nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#search">Find Salons</a></li>
+            <li><a href="appointments.html" class="active">Appointments</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <a href="login.html" class="btn-secondary"><i class="fas fa-user"></i> Sign In</a>
+        </div>
+        <button id="mobile-menu-btn" class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu">
+      <div class="container">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#search">Find Salons</a></li>
+          <li><a href="appointments.html">Appointments</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="login.html"><i class="fas fa-user"></i> Sign In</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Appointments Section -->
+  <main class="container" style="margin-top: 140px; margin-bottom: 60px;">
+    <h1 class="section-title">My Appointments</h1>
+
+    <!-- Upcoming Appointments -->
+    <section class="appointments-list">
+      <h2 class="mb-4">Upcoming Appointments</h2>
+      <div class="salons-grid" id="upcoming-appointments">
+        <!-- Appointments will be dynamically injected here -->
+      </div>
+    </section>
+
+    <!-- Past Appointments -->
+    <section class="appointments-list" style="margin-top: 60px;">
+      <h2 class="mb-4">Past Appointments</h2>
+      <div class="salons-grid" id="past-appointments">
+        <!-- Appointments will be dynamically injected here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h3 class="footer-title">BeautySalon</h3>
+          <p>Your one-stop destination for finding and booking the best beauty salons in your city.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#search">Find Salons</a></li>
+            <li><a href="appointments.html">My Appointments</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Popular Cities</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="city-link" data-city="New York">New York</a></li>
+            <li><a href="#" class="city-link" data-city="Los Angeles">Los Angeles</a></li>
+            <li><a href="#" class="city-link" data-city="Chicago">Chicago</a></li>
+            <li><a href="#" class="city-link" data-city="Miami">Miami</a></li>
+            <li><a href="#" class="city-link" data-city="San Francisco">San Francisco</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> 123 Beauty Street, Suite 100, New York, NY 10001</li>
+            <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+            <li><i class="fas fa-envelope"></i> info@beautysalon.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 BeautySalon. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript to Load Appointments -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const upcomingContainer = document.getElementById("upcoming-appointments");
+      const pastContainer = document.getElementById("past-appointments");
+
+      const mockAppointments = [
+        {
+          id: 1,
+          salonName: "Glamour & Style Salon",
+          image: "https://images.pexels.com/photos/3992874/pexels-photo-3992874.jpeg",
+          address: "123 Main Street, New York",
+          service: "Haircut & Styling",
+          date: "2025-06-10",
+          time: "15:00",
+        },
+        {
+          id: 2,
+          salonName: "Serenity Spa & Salon",
+          image: "https://images.pexels.com/photos/3997385/pexels-photo-3997385.jpeg",
+          address: "789 Wellness Way, Los Angeles",
+          service: "Anti-Aging Facial",
+          date: "2025-05-15",
+          time: "12:30",
+        }
+      ];
+
+      const stored = JSON.parse(localStorage.getItem("appointments"));
+      const appointments = stored && stored.length ? stored : mockAppointments;
+
+      const now = new Date();
+
+      appointments.forEach(appt => {
+        const isPast = new Date(`${appt.date}T${appt.time}`) < now;
+
+        const card = document.createElement("div");
+        card.classList.add("salon-card");
+        card.innerHTML = `
+          <img class="salon-image" src="${appt.image}" alt="${appt.salonName}">
+          <div class="salon-content">
+            <h3 class="salon-name">${appt.salonName}</h3>
+            <div class="salon-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>${appt.address}</span>
+            </div>
+            <p class="salon-service"><strong>Service:</strong> ${appt.service}</p>
+            <p class="salon-service"><strong>Date:</strong> ${formatDate(appt.date)}</p>
+            <p class="salon-service"><strong>Time:</strong> ${formatTime(appt.time)}</p>
+            <div class="salon-footer">
+              ${isPast
+                ? `<button class="btn-secondary">Rebook</button>
+                   <button class="btn-primary">Leave Review</button>`
+                : `<button class="btn-secondary">Cancel</button>
+                   <button class="btn-primary">Reschedule</button>`
+              }
+            </div>
+          </div>
+        `;
+
+        if (isPast) {
+          pastContainer.appendChild(card);
+        } else {
+          upcomingContainer.appendChild(card);
+        }
+      });
+
+      function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      }
+
+      function formatTime(timeStr) {
+        const [hour, minute] = timeStr.split(":").map(Number);
+        const ampm = hour >= 12 ? "PM" : "AM";
+        const h12 = hour % 12 || 12;
+        return `${h12}:${minute.toString().padStart(2, '0')} ${ampm}`;
+      }
+    });
+  </script>
+
+</body>
+</html>
